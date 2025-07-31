@@ -70,11 +70,88 @@ const App = () => {
   const COLORS = ['#8884d8', '#82ca9d', '#ff6b6b', '#feca57', '#1dd1a1', '#54a0ff'];
 
 
+   return (
+    <div className="app-container">
+      <h1 className="app-title">Expense Tracker</h1>
+      <div className="nav-buttons">
+        <button onClick={() => setView('tracker')}>Tracker</button>
+        <button onClick={() => setView('saves')}>View Saves</button>
+        <button className="toggle-dark" onClick={() => setDarkMode(prev => !prev)}>
+          Toggle {darkMode ? 'Light' : 'Dark'} Mode
+        </button>
+      </div>
+
+      {view === 'tracker' ? (
+        <>
+          <div className="budget-input">
+            <label>Set Wallet:</label>
+            <select value={wallet} onChange={(e) => setWallet(e.target.value)}>
+              <option value="personal">Personal</option>
+              <option value="business">Business</option>
+              <option value="travel">Travel</option>
+            </select>
+            <label>Set Total Budget (€):</label>
+            <input
+              type="number"
+              value={budget}
+              onChange={(e) => setBudget(parseFloat(e.target.value) || 0)}
+            />
+            <label>Snapshot Frequency:</label>
+            <select value={snapshotFrequency} onChange={(e) => setSnapshotFrequency(e.target.value)}>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+            <p className="remaining-budget">Remaining Budget: €{remainingBudget.toFixed(2)}</p>
+          </div>
+
+          <form className="expense-form" onSubmit={handleSubmit}>
+            <input name="amount" type="number" placeholder="Amount (€)" value={form.amount} onChange={handleChange} />
+            <input name="category" type="text" placeholder="Category" value={form.category} onChange={handleChange} />
+            <input name="description" type="text" placeholder="Description" value={form.description} onChange={handleChange} />
+            <input name="date" type="date" value={form.date} onChange={handleChange} />
+            <button type="submit">Add Expense</button>
+            <button type="button" onClick={handleSave} className="save-button">Save All</button>
+            <button type="button" onClick={handleClearAll}>Clear All</button>
+          </form>
+
+          <div className="chart-pair">
+            <div className="chart-container">
+              <PieChart width={250} height={250}>
+                <Pie data={unspentData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                  {unspentData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip /><Legend />
+              </PieChart>
+            </div>
+            <div className="chart-container">
+              <PieChart width={250} height={250}>
+                <Pie data={categoryData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                  {categoryData.map((entry, index) => (
+                    <Cell key={`cell-cat-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip /><Legend />
+              </PieChart>
+            </div>
+          </div>
+
+           <h2>Total: €{total.toFixed(2)}</h2>
+          <ul className="expense-list">
+            {expenses.map((exp) => (
+              <li key={exp.id} className="expense-item">
+                <strong>€{exp.amount.toFixed(2)}</strong> — {exp.category} — {exp.description || 'No description'} — {exp.date}
+                <button onClick={() => handleDelete(exp.id)}>🗑️</button>
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : 
 
 
 
 
-  
-}
+
 
 export default App;
