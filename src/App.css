@@ -28,3 +28,34 @@ body.dark-mode {
   --danger-hover: #fab1a0;
   --clicked: #55efc4;
 }
+
+.app-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.app-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: var(--text);
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: var(--button-bg);
+  color: white;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
