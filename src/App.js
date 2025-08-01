@@ -26,7 +26,7 @@ const App = () => {
     document.body.classList.toggle('dark-mode', darkMode);
   }, [darkMode]);
 
-   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -70,7 +70,7 @@ const App = () => {
   const COLORS = ['#8884d8', '#82ca9d', '#ff6b6b', '#feca57', '#1dd1a1', '#54a0ff'];
 
 
-   return (
+  return (
     <div className="app-container">
       <h1 className="app-title">Expense Tracker</h1>
       <div className="nav-buttons">
@@ -137,7 +137,7 @@ const App = () => {
             </div>
           </div>
 
-           <h2>Total: €{total.toFixed(2)}</h2>
+          <h2>Total: €{total.toFixed(2)}</h2>
           <ul className="expense-list">
             {expenses.map((exp) => (
               <li key={exp.id} className="expense-item">
@@ -162,13 +162,44 @@ const App = () => {
             }, {});
             const pieCategories = Object.entries(catTotals).map(([name, value]) => ({ name, value }));
 
-             return (
+            return (
               <div key={save.id} className="save-entry">
                 <h3>{save.timestamp}</h3>
                 <p><strong>Wallet:</strong> {save.wallet}</p>
                 <p><strong>Budget:</strong> €{save.budget}</p>
                 <p><strong>Spent:</strong> €{save.totalSpent}</p>
-          
+                <div className="chart-pair">
+                  <div className="chart-container">
+                    <PieChart width={250} height={250}>
+                      <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                        {pieData.map((entry, index) => (
+                          <Cell key={`spent-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip /><Legend />
+                    </PieChart>
+                  </div>
+                  <div className="chart-container">
+                    <PieChart width={250} height={250}>
+                      <Pie data={pieCategories} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+                        {pieCategories.map((entry, index) => (
+                          <Cell key={`cat-${index}`} fill={COLORS[index % COLORS.length]} />
+                        ))}
+                      </Pie>
+                      <Tooltip /><Legend />
+                    </PieChart>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+          <button onClick={clearSaves}>Clear All Saves</button>
+        </>
+      )}
+    </div>
+  );
+};
+
 
 
 
