@@ -156,6 +156,18 @@ const App = () => {
               { name: 'Unspent', value: save.budget - save.totalSpent }
             ];
 
+            const catTotals = save.expenses.reduce((acc, curr) => {
+              acc[curr.category] = (acc[curr.category] || 0) + curr.amount;
+              return acc;
+            }, {});
+            const pieCategories = Object.entries(catTotals).map(([name, value]) => ({ name, value }));
+
+             return (
+              <div key={save.id} className="save-entry">
+                <h3>{save.timestamp}</h3>
+                <p><strong>Wallet:</strong> {save.wallet}</p>
+                <p><strong>Budget:</strong> €{save.budget}</p>
+                <p><strong>Spent:</strong> €{save.totalSpent}</p>
           
 
 
