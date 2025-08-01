@@ -59,3 +59,17 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+
+button:hover {
+  background-color: var(--button-hover);
+}
+
+button:disabled {
+  background-color: #b2bec3;
+  cursor: not-allowed;
+}
+
+/* New: Flash green briefly when clicked */
+button.clicked {
+  background-color: var(--clicked) !important;
+}
