@@ -85,3 +85,25 @@ button.clicked {
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
+input,
+select {
+  padding: 10px;
+  border: 1px solid #dcdde1;
+  border-radius: 6px;
+  font-size: 1rem; 
+  background-color: white;
+  color: black;
+}
+
+body.dark-mode input,
+body.dark-mode select {
+  background-color: #636e72;
+  color: white;
+  border: 1px solid #b2bec3;
+}
+
+.remaining-budget {
+  font-weight: bold;
+  color: #27ae60;
+}
