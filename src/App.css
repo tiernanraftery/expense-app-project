@@ -17,3 +17,14 @@ body {
   --danger-hover: #ff7675;
   --clicked: #00b894;
 }
+
+body.dark-mode {
+  --bg: #2f3640;
+  --text: #f5f6fa;
+  --card-bg: #353b48;
+  --button-bg: #40739e;
+  --button-hover: #718093;
+  --danger: #e17055;
+  --danger-hover: #fab1a0;
+  --clicked: #55efc4;
+}

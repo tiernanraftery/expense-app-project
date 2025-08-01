@@ -147,7 +147,16 @@ const App = () => {
             ))}
           </ul>
         </>
-      ) : 
+      ) : (
+        <>
+          <h2>Saved Snapshots</h2>
+          {saves.length === 0 ? <p>No saves yet.</p> : saves.map(save => {
+            const pieData = [
+              { name: 'Spent', value: save.totalSpent },
+              { name: 'Unspent', value: save.budget - save.totalSpent }
+            ];
+
+          
 
 
 
